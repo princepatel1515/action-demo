@@ -29,7 +29,7 @@ jobs:
   custom_job_2:
     runs-on: ubuntu-latest
     needs: custom_job_1
-    if: ${{ needs.custom_job_1.outputs.job-status != 'success' }}
+    if: ${{ needs.custom_job_1.outputs.job-status != 'true' }}
 
     steps:
       - name: Checkout code
