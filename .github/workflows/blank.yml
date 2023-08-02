@@ -7,30 +7,38 @@ on:
   workflow_dispatch:
 
 jobs:
-  custom_job:
+  custom_job_1:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Your Custom Step
-        id: custom_step
+      - name: Your Custom Step 1
         run: |
           # Your custom script or command here
-          # Set the output variable based on your condition
           # Example:
-          if [ "$SOME_CONDITION" = "true" ]; then
-            echo "Custom Job Succeeded"
-            echo "JOB_STATUS=success" >> $GITHUB_ENV
+          if [ "$SOME_CONDITION_1" != "true" ]; then
+            echo "Custom Job 1 Failed"
+            exit 1  # Set a non-zero exit status to indicate failure
           else
-            echo "Custom Job Failed"
-            echo "JOB_STATUS=failure" >> $GITHUB_ENV
+            echo "Custom Job 1 Succeeded"
           fi
 
-  display_job_status:
-    needs: custom_job
+  custom_job_2:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Check Job Outcome
-        run: echo "Job Outcome: $JOB_STATUS"
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Your Custom Step 2
+        run: |
+          # Your custom script or command here
+          # Example:
+          if [ "$SOME_CONDITION_2" != "true" ]; then
+            echo "Custom Job 2 Failed"
+            exit 1  # Set a non-zero exit status to indicate failure
+          else
+            echo "Custom Job 2 Succeeded"
+          fi
