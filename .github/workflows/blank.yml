@@ -40,3 +40,21 @@ jobs:
           # Your custom script or command here
           # Example:
           echo "Running Custom Job 2 even if Custom Job 1 failed ${{ needs.custom_job_1.outputs.job-status }}"
+
+  check_job_status:
+    runs-on: ubuntu-latest
+    needs: custom_job_1
+
+    steps:
+      - name: Check Job 1 Status
+        if: ${{ needs.custom_job_1.result == 'failure' }}
+        run: echo "Custom Job 1 has failed"
+      - name: Check Job 2 Status
+        if: ${{ needs.custom_job_2.result == 'failure' }}
+        run: echo "Custom Job 2 has failed"
+      - name: Check Overall Job Status
+        if: ${{ needs.custom_job_1.result == 'failure' || needs.custom_job_2.result == 'failure' }}
+        run: echo "At least one of the jobs has failed"
+      - name: Check Overall Job Status
+        if: ${{ needs.custom_job_1.result == 'success' && needs.custom_job_2.result == 'success' }}
+        run: echo "Both jobs have succeeded"
