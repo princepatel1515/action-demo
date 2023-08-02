@@ -23,7 +23,7 @@ jobs:
             string1="Hello"
             string2="World"
 
-            if [ "$string1" != "$string2" ]; then
+            if [ "$string1" = "$string2" ]; then
               echo "The strings are equal."
               break  # Break out of the loop if the comparison succeeds
             else
