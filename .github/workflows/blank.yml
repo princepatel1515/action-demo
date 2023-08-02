@@ -1,37 +1,38 @@
-name: Compare Strings with Retry
+name: Custom Badge Status
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
-  compare:
+  custom_job:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Compare Strings
+      - name: Your Custom Step
         run: |
-          attempt=1
-          max_attempts=3
+          # Your custom script or command here
+          # Set the exit status based on your condition
+          # Example:
+          if [ "$SOME_CONDITION" = "true" ]; then
+            echo "Custom Job Succeeded"
+            exit 0  # Set the exit status to 0 for success
+          else
+            echo "Custom Job Failed"
+            exit 1  # Set the exit status to 1 for failure
+          fi
 
-          while [ $attempt -le $max_attempts ]; do
-            string1="Hello"
-            string2="World"
+      - name: Update Job Outcome
+        id: job-status
+        run: echo "Job Status: ${{ job.status }}" >> $GITHUB_ENV
 
-            if [ "$string1" = "$string2" ]; then
-              echo "The strings are equal."
-              break  # Break out of the loop if the comparison succeeds
-            else
-              echo "Attempt $attempt failed."
-              attempt=$((attempt+1))
-            fi
-
-            if [ $attempt -gt $max_attempts ]; then
-              echo "All attempts failed."
-            fi
-          done
+  display_job_status:
+    needs: custom_job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Job Outcome
+        run: echo "Job Outcome: ${{ needs.custom_job.outputs.job-status }}"  # Access the custom_job's outcome using the output
