@@ -4,8 +4,7 @@ on:
   push:
     branches:
       - main
-   workflow_dispatch:
-   
+    workflow_dispatch:
 jobs:
   custom_job:
     runs-on: ubuntu-latest
@@ -15,25 +14,22 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Your Custom Step
+        id: custom_step
         run: |
           # Your custom script or command here
-          # Set the exit status based on your condition
+          # Set the output variable based on your condition
           # Example:
           if [ "$SOME_CONDITION" = "true" ]; then
             echo "Custom Job Succeeded"
-            exit 0  # Set the exit status to 0 for success
+            echo "::set-output name=job-status::success"  # Set the output to 'success' for success
           else
             echo "Custom Job Failed"
-            exit 1  # Set the exit status to 1 for failure
+            echo "::set-output name=job-status::failure"  # Set the output to 'failure' for failure
           fi
-
-      - name: Update Job Outcome
-        id: job-status
-        run: echo "Job Status: ${{ job.status }}" >> $GITHUB_ENV
 
   display_job_status:
     needs: custom_job
     runs-on: ubuntu-latest
     steps:
       - name: Check Job Outcome
-        run: echo "Job Outcome: ${{ needs.custom_job.outputs.job-status }}"  # Access the custom_job's outcome using the output
+        run: echo "Job Outcome: ${{ needs.custom_job.outputs.job-status }}"
