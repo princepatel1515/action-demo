@@ -21,16 +21,16 @@ jobs:
           # Example:
           if [ "$SOME_CONDITION_1" != "true" ]; then
             echo "Custom Job 1 Failed"
-            echo "false" >> $GITHUB_ENV  # Set a custom flag to indicate failure
+            echo "::set-output name=job-status::false"  # Set the output to 'false' for failure
           else
             echo "Custom Job 1 Succeeded"
-            echo "true" >> $GITHUB_ENV   # Set a custom flag to indicate success
+            echo "::set-output name=job-status::true"  # Set the output to 'true' for success
           fi
 
   custom_job_2:
     runs-on: ubuntu-latest
     needs: custom_job_1
-    if: ${{ env.CUSTOM_JOB_1_STATUS != 'false' }}
+    if: ${{ needs.custom_job_1.outputs.job-status != 'false' }}
 
     steps:
       - name: Checkout code
