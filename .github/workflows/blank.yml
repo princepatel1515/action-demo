@@ -19,12 +19,11 @@ jobs:
         run: |
           # Your custom script or command here
           # Example:
-          if [ "$SOME_CONDITION_1" = "false" ]; then
+          if [ "$SOME_CONDITION_1" != "true" ]; then
             echo "Custom Job 1 Failed"
-            echo "::set-output name=job-status::false"  # Set the output to 'false' for failure
+            exit 1  # Set a non-zero exit status to indicate failure
           else
             echo "Custom Job 1 Succeeded"
-            echo "::set-output name=job-status::true"  # Set the output to 'true' for success
           fi
 
   custom_job_2:
