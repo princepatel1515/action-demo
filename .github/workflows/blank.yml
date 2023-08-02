@@ -29,4 +29,4 @@ jobs:
           fi
 
       - name: Check Job Outcome
-        run: 'echo "Job Outcome: ${{ needs.custom_job.outputs.job-status }}"'
+        run: echo "Job Outcome: ${{ needs.custom_job.outputs.job-status }}"
