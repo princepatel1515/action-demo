@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - main
-    workflow_dispatch:
+  workflow_dispatch:
+
 jobs:
   custom_job:
     runs-on: ubuntu-latest
@@ -19,7 +20,7 @@ jobs:
           # Your custom script or command here
           # Set the output variable based on your condition
           # Example:
-          if [ "true" = "true" ]; then
+          if [ "$SOME_CONDITION" = "true" ]; then
             echo "Custom Job Succeeded"
             echo "::set-output name=job-status::success"  # Set the output to 'success' for success
           else
@@ -32,4 +33,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check Job Outcome
-        run: echo "Job Outcome: ${{ needs.custom_job.outputs.job-status }}"
+        run: 'echo "Job Outcome: ${{ needs.custom_job.outputs.job-status }}"'
