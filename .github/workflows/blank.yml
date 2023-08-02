@@ -39,4 +39,4 @@ jobs:
         run: |
           # Your custom script or command here
           # Example:
-          echo "Running Custom Job 2 even if Custom Job 1 failed needs.custom_job_1.outputs.job-status"
+          echo "Running Custom Job 2 even if Custom Job 1 failed ${{ needs.custom_job_1.outputs.job-status }}"
