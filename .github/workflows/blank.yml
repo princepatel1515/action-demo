@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - main
-
+   workflow_dispatch:
+   
 jobs:
   custom_job:
     runs-on: ubuntu-latest
