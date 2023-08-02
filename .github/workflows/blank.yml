@@ -22,15 +22,12 @@ jobs:
           # Example:
           if [ "$SOME_CONDITION" = "true" ]; then
             echo "Custom Job Succeeded"
-            echo "::set-output name=job-status::success"  # Set the output to 'success' for success
+            echo "::set-output name=job-status::failure"  # Set the output to 'success' for success
           else
             echo "Custom Job Failed"
-            echo "::set-output name=job-status::failure"  # Set the output to 'failure' for failure
+            echo "::set-output name=job-status::success"  # Set the output to 'failure' for failure
           fi
 
-  display_job_status:
-    needs: custom_job
-    runs-on: ubuntu-latest
     steps:
       - name: Check Job Outcome
         run: 'echo "Job Outcome: ${{ needs.custom_job.outputs.job-status }}"'
