@@ -1,4 +1,4 @@
-name: Compare Strings
+name: Compare Strings with Retry
 
 on:
   push:
@@ -15,11 +15,22 @@ jobs:
 
       - name: Compare Strings
         run: |
-          string1="Hello"
-          string2="Hello"
+          attempt=1
+          max_attempts=3
 
-          if [ "$string1" = "$string2" ]; then
-            echo "The strings are equal."
-          else
-            echo "The strings are not equal."
-          fi
+          while [ $attempt -le $max_attempts ]; do
+            string1="Hello"
+            string2="World"
+
+            if [ "$string1" = "$string2" ]; then
+              echo "The strings are equal."
+              break  # Break out of the loop if the comparison succeeds
+            else
+              echo "Attempt $attempt failed."
+              attempt=$((attempt+1))
+            fi
+
+            if [ $attempt -gt $max_attempts ]; then
+              echo "All attempts failed."
+            fi
+          done
