@@ -28,6 +28,5 @@ jobs:
             echo "::set-output name=job-status::success"  # Set the output to 'failure' for failure
           fi
 
-    steps:
       - name: Check Job Outcome
         run: 'echo "Job Outcome: ${{ needs.custom_job.outputs.job-status }}"'
