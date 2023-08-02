@@ -19,7 +19,7 @@ jobs:
           # Your custom script or command here
           # Set the output variable based on your condition
           # Example:
-          if [ "$SOME_CONDITION" = "true" ]; then
+          if [ "true" = "true" ]; then
             echo "Custom Job Succeeded"
             echo "::set-output name=job-status::success"  # Set the output to 'success' for success
           else
