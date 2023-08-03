@@ -26,7 +26,6 @@ jobs:
             echo "job-status=${{ steps.get_custom_job_1_status.outputs.job-status }}" >> $GITHUB_ENV
           fi
 
-    steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
