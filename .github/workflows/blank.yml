@@ -39,6 +39,8 @@ jobs:
             # Increment the variable by +1
             var=$((var+1))
             echo "var is equal to 1"
+            echo "::set-output name=status::${var}"
+            continue-on-error: false
           else
             echo "var is not equal to 1, failing the job"
             exit 1  # Exiting with a non-zero status to indicate failure
