@@ -24,7 +24,8 @@ jobs:
             var=$((var+1))
             echo "var is equal to 1"
           else
-            echo "var is not equal to 1"
+            echo "var is not equal to 1, failing the job"
+            exit 1  # Exiting with a non-zero status to indicate failure
           fi
           
           # Output the status to be used in the next step
@@ -41,5 +42,3 @@ jobs:
         run: |
           echo "Else Message: Status not equal to 1"
           # Add code here to display a badge or message for the else case
-
-          
