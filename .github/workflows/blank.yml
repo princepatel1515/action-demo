@@ -32,6 +32,7 @@ jobs:
           echo "::set-output name=status::${var}"
 
       - name: Show Status Badge
+        id: cs2
         run: |
           echo "Status: Pass $var"
           if [ "$var" == 1 ]; then
@@ -43,9 +44,3 @@ jobs:
             exit 1  # Exiting with a non-zero status to indicate failure
           fi
           # Add code here to display a badge for passing status
-
-      - name: Show Else Message
-        if: steps.custom_step_1.outputs.status != '2'
-        run: |
-          echo "Else Message: Status not equal to 1"
-          # Add code here to display a badge or message for the else case
