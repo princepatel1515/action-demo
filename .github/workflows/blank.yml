@@ -37,6 +37,8 @@ jobs:
           # Add code here to display a badge for passing status
 
       - name: Show Else Message
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
         if: ${{ always() && steps.custom_step_1.outputs.status == 'fail' }}
         run: |
           echo "Else Message: Status not equal to 1"
