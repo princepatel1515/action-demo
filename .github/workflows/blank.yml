@@ -6,18 +6,18 @@ on:
       - main
   workflow_dispatch:
 
+env:
+  var: 1
 jobs:
   custom_job_1:
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Your Custom Step 1
         id: custom_job_1
-        env:
-          var: 1
         run: |
           if [ "$var" != 1 ]; then
             # Increment the variable by +1
