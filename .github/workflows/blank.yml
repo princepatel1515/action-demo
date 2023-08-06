@@ -19,7 +19,7 @@ jobs:
         env:
           var: 1
         run: |
-          if [ "$var" -eq 1 ]; then
+          if [ "$var" != 1 ]; then
             # Increment the variable by +1
             var=$((var+1))
             echo "var is equal to 1"
@@ -32,7 +32,7 @@ jobs:
           echo "::set-output name=status::${var}"
 
       - name: Show Status Badge
-        if: steps.custom_step_1.outputs.status == '2'
+        if: steps.custom_step_1.outputs.status == '1'
         run: |
           echo "Status: Pass"
           # Add code here to display a badge for passing status
