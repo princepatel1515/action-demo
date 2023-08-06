@@ -29,7 +29,7 @@ jobs:
           fi
           
           # Output the status to be used in the next step
-          echo "::set-output name=status::${var}"
+          # echo "::set-output name=status::${var}"
 
       - name: Show Status Badge
         id: cs2
