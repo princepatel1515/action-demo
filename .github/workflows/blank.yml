@@ -32,7 +32,7 @@ jobs:
           # echo "::set-output name=status::${var}"
 
       - name: Show Status Badge
-        if: ${{ always() && "$var" == 1 }}
+        if: ${{ always() }}
         continue-on-error: false
         run: |
           echo "Status: Pass $var"
