@@ -26,7 +26,7 @@ jobs:
             echo "::set-output name=status::pass" # Set a custom output named 'status' to 'pass'
           else
             echo "var is not equal to 1, failing the job"
-            echo "{status}={fail}" >> $GITHUB_OUTPUT # Set a custom output named 'status' to 'fail'
+            echo "::set-output name=status::fail" # Set a custom output named 'status' to 'fail'
             exit 1  # Exiting with a non-zero status to indicate failure
           fi
 
@@ -43,3 +43,15 @@ jobs:
         run: |
           echo "Else Message: Status not equal to 1"
           echo "::set-env name=CUSTOM_STATUS::pass" # Set a custom environment variable named 'CUSTOM_STATUS' to 'pass'
+
+      - name: Generate Badge
+        if: always() # This step will always run, regardless of previous steps
+        run: |
+          status=${{ steps.custom_step_1.outputs.status }}
+          if [ "$status" == "pass" ]; then
+            # Generate and display a badge for passing status
+            echo "![Pass](https://img.shields.io/badge/Status-Pass-brightgreen)"
+          else
+            # Generate and display a badge for the else case
+            echo "![Else](https://img.shields.io/badge/Status-Else-red)"
+          fi
