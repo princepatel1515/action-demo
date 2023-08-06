@@ -48,7 +48,7 @@ jobs:
         if: always() # This step will always run, regardless of previous steps
         run: |
           status=${{ steps.custom_step_1.outputs.status }}
-          if [ "$status" == "pass" ]; then
+          if [ "$status" != "pass" ]; then
             # Generate and display a badge for passing status
             echo "![Pass](https://img.shields.io/badge/Status-Pass-brightgreen)"
           else
