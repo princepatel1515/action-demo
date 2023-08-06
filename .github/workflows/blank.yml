@@ -48,5 +48,5 @@ jobs:
           fi
           # Add code here to display a badge for passing status
 
-      if: ${{ steps.custom_step_1.outputs.status != '2' }}
-      continue-on-error: false
+    if: ${{ steps.custom_step_1.outputs.status != '2' }}
+    continue-on-error: false
