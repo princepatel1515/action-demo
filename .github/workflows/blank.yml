@@ -31,7 +31,7 @@ jobs:
           fi
 
       - name: Show Status Badge
-        if: steps.custom_step_1.outputs.status == 'pass'
+        if: [ always() && steps.custom_step_1.outputs.status == 'pass']
         run: |
           echo "Status: Pass"
           # Add code here to display a badge for passing status
