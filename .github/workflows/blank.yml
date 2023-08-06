@@ -32,7 +32,8 @@ jobs:
           # echo "::set-output name=status::${var}"
 
       - name: Show Status Badge
-        if: ${{ always() }}
+        if: ${{ always() && "$var" == 1 }}
+        continue-on-error: false
         run: |
           echo "Status: Pass $var"
           if [ "$var" == 1 ]; then
@@ -40,7 +41,6 @@ jobs:
             var=$((var+1))
             echo "var is equal to 1"
             echo "::set-output name=status::${var}"
-            continue-on-error: false
           else
             echo "var is not equal to 1, failing the job"
             exit 1  # Exiting with a non-zero status to indicate failure
