@@ -32,6 +32,7 @@ jobs:
           # echo "::set-output name=status::${var}"
 
       - name: Show Status Badge
+        id: custom_step_1
         if: ${{ always() }}
         continue-on-error: false
         run: |
