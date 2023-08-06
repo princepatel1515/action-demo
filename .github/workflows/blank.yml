@@ -18,8 +18,8 @@ jobs:
         id: custom_step_1
         run: |
           ref=1
-          if [[ ${{ github.ref }} == *1* ]]; then
-            v=$(echo ${{ github.ref }} | cut -d'/' -f3)
+          if [[ ${{ ref }} == *1* ]]; then
+            v=$(echo ${{ ref }} | cut -d'/' -f3)
             echo "version tag is ${v}"
             ref=2
           else
