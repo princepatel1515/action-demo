@@ -40,4 +40,4 @@ jobs:
         if: ${{ always() && steps.custom_step_1.outputs.status == 'fail' }}
         run: |
           echo "Else Message: Status not equal to 1"
-          # Add code here to display a badge or message for the else case
+          echo "::set-env name=CUSTOM_STATUS::pass" # Set a custom environment variable named 'CUSTOM_STATUS' to 'pass'
