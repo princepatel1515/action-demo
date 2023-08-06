@@ -19,5 +19,6 @@ jobs:
         env:
           var: 1
         run: |
+          var=$((var+1))
           echo variable is $var+1
           
