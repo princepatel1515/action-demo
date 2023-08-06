@@ -26,7 +26,7 @@ jobs:
             echo "::set-output name=status::pass" # Set a custom output named 'status' to 'pass'
           else
             echo "var is not equal to 1, failing the job"
-            echo "::set-output name=status::fail" # Set a custom output named 'status' to 'fail'
+            echo "{status}={fail}" >> $GITHUB_OUTPUT # Set a custom output named 'status' to 'fail'
             exit 1  # Exiting with a non-zero status to indicate failure
           fi
 
