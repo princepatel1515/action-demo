@@ -46,3 +46,7 @@ jobs:
             exit 1  # Exiting with a non-zero status to indicate failure
           fi
           # Add code here to display a badge for passing status
+
+      - name: Show Status Badge
+        if: ${{ always() && $var == 1 }}
+        continue-on-error: false
