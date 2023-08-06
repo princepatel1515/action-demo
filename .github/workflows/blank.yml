@@ -32,7 +32,6 @@ jobs:
           echo "::set-output name=status::${var}"
 
       - name: Show Status Badge
-        if: steps.custom_step_1.outputs.status == 1
         run: |
           echo "Status: Pass $var"
           if [ "$var" == 1 ]; then
