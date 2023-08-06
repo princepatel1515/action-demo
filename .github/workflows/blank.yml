@@ -19,7 +19,7 @@ jobs:
         env:
           var: 1
         run: |
-          if [ "$var" -eq 1 ]; then
+          if [ "$var" -eq 2 ]; then
             # Increment the variable by +1
             var=$((var+1))
             echo "var is equal to 1"
