@@ -25,18 +25,3 @@ jobs:
           else
             echo "job-status=${{ steps.get_custom_job_1_status.outputs.job-status }}" >> $GITHUB_ENV
           fi
-
-  custom_job_2:
-    runs-on: ubuntu-latest
-    needs: [ custom_job_1 ]
-    if: ${{ always() && contains(needs.custom_job_1.result, 'failure') }}
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Your Custom Step 2
-        run: |
-          # Your custom script or command here
-          # Example:
-          echo "Running Custom Job 2 even if Custom Job 1 failed jobs.custom_job_1"
