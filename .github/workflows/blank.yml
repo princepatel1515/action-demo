@@ -31,13 +31,13 @@ jobs:
           fi
 
       - name: Show Status Badge
-        if: ${{ steps.custom_step_1.outputs.status == 'pass' }}
+        if: ${{ always() && steps.custom_step_1.outputs.status == 'pass' }}
         run: |
           echo "Status: Pass"
           # Add code here to display a badge for passing status
 
       - name: Show Else Message
-        if: ${{ steps.custom_step_1.outputs.status == 'fail' }}
+        if: ${{ always() && steps.custom_step_1.outputs.status == 'fail' }}
         run: |
           echo "Else Message: Status not equal to 1"
           # Add code here to display a badge or message for the else case
