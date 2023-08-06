@@ -17,11 +17,12 @@ jobs:
       - name: Your Custom Step 1
         id: custom_step_1
         run: |
-          # Your custom script or command here
-          # Example:
-          if [ "$SOME_CONDITION_1" = "true" ]; then
-            echo "Custom Job 1 Failed"
-            exit 1  # Set a non-zero exit status to indicate failure
+          ls
+          echo ${{ github.ref }}
+          ref='refs/tags/v'
+          if [[ ${{ github.ref }} == *${ref}* ]]; then
+            v=$(echo ${{ github.ref }} | cut -d'/' -f3)
+            echo "version tag is ${v}"
           else
-            echo "job-status=${{ steps.get_custom_job_1_status.outputs.job-status }}" >> $GITHUB_ENV
+            echo "There is no github tag reference, skipping"
           fi
