@@ -16,12 +16,8 @@ jobs:
 
       - name: Your Custom Step 1
         id: custom_step_1
+        env:
+          var: 1
         run: |
-          ref='1'
-          if [[ ${{ ref }} == *1* ]]; then
-            v=$(echo ${{ ref }} | cut -d'/' -f3)
-            echo "version tag is ${v}"
-            ref=2
-          else
-            echo "There is no github tag reference, skipping ${{ ref }}"
-          fi
+          echo variable is $var
+          
