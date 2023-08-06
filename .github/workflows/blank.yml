@@ -19,13 +19,27 @@ jobs:
         env:
           var: 1
         run: |
-          if [ "$var" != 1 ]; then
+          if [ "$var" -eq 1 ]; then
             # Increment the variable by +1
             var=$((var+1))
+            echo "var is equal to 1"
           else
-            echo "The variable is not equal to 1, skipping increment."
+            echo "var is not equal to 1"
           fi
           
-          echo "variable is $var"
+          # Output the status to be used in the next step
+          echo "::set-output name=status::${var}"
+
+      - name: Show Status Badge
+        if: steps.custom_step_1.outputs.status == '2'
+        run: |
+          echo "Status: Pass"
+          # Add code here to display a badge for passing status
+
+      - name: Show Else Message
+        if: steps.custom_step_1.outputs.status != '2'
+        run: |
+          echo "Else Message: Status not equal to 1"
+          # Add code here to display a badge or message for the else case
 
           
