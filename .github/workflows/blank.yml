@@ -28,7 +28,7 @@ jobs:
 
       - name: Set Badge Status
         run: |
-          if [ "$job-status" == "success" ]; then
+          if [ "$job-status" != "success" ]; then
             echo "::set-output name=badge::success"
           else
             echo "::set-output name=badge::failure"
