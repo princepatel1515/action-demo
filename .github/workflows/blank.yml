@@ -25,6 +25,7 @@ jobs:
           else
             echo "job-status=${{ steps.get_custom_job_1_status.outputs.job-status }}" >> $GITHUB_ENV
           fi
+          
     clear_on_fail: true
 
   custom_job_2:
