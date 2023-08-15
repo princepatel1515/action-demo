@@ -5,6 +5,7 @@ on:
     branches:
       - main
   workflow_dispatch:
+    debug: true
 
 jobs:
   custom_job:
