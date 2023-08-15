@@ -36,3 +36,4 @@ jobs:
           # Your custom script or command here
           # Example:
           echo "Running Custom Job 2 since Custom Job 1 succeeded"
+          echo "job-status=success" >> $GITHUB_ENV
