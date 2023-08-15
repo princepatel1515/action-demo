@@ -26,12 +26,9 @@ jobs:
             echo "job-status=${{ steps.get_custom_job_1_status.outputs.job-status }}" >> $GITHUB_ENV
           fi
 
-    skip: true
-
   custom_job_2:
     runs-on: ubuntu-latest
     needs: [ custom_job_1 ]
-    if: ${{ always() && contains(needs.custom_job_1.result, 'failure') }}
 
     steps:
       - name: Checkout code
