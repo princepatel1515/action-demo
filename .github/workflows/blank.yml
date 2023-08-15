@@ -25,8 +25,6 @@ jobs:
           else
             echo "job-status=${{ steps.get_custom_job_1_status.outputs.job-status }}" >> $GITHUB_ENV
           fi
-          
-    clear_on_fail: true
 
   custom_job_2:
     runs-on: ubuntu-latest
@@ -39,6 +37,15 @@ jobs:
 
       - name: Your Custom Step 2
         run: |
-          # Your custom script or command here
-          # Example:
           echo "Running Custom Job 2 even if Custom Job 1 failed jobs.custom_job_1"
+
+      - name: Set Badge Status
+        run: |
+          if [ "$job-status" == "success" ]; then
+            echo "::set-output name=badge::success"
+          else
+            echo "::set-output name=badge::failure"
+          fi
+
+    outputs:
+      badge: ${{ steps.set_badge_status.outputs.badge }}
