@@ -40,3 +40,14 @@ jobs:
           # Your custom script or command here
           # Example:
           echo "Running Custom Job 2 even if Custom Job 1 failed jobs.custom_job_1"
+
+      - name: Set Badge Status
+        run: |
+          if [ "$job-status" == "success" ]; then
+            echo "::set-output name=badge::success"
+          else
+            echo "::set-output name=badge::failure"
+          fi
+
+    outputs:
+      badge: ${{ steps.set_badge_status.outputs.badge }}
