@@ -21,15 +21,15 @@ jobs:
           # Example:
           if [ "$SOME_CONDITION_1" != "true" ]; then
             echo "Custom Job 1 Failed"
-            exit 1  # Set a non-zero exit status to indicate failure
+            echo "job-status=failure" >> $GITHUB_ENV
           else
-            echo "job-status=${{ steps.custom_step_1.outputs.job-status }}" >> $GITHUB_ENV
+            echo "job-status=success" >> $GITHUB_ENV
           fi
 
   custom_job_2:
     runs-on: ubuntu-latest
     needs: [custom_job_1]
-    if: ${{ always() && needs.custom_job_1.result == 'success' }}
+    if: ${{ always() && needs.custom_job_1.outputs.job-status != 'success' }}
 
     steps:
       - name: Checkout code
