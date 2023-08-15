@@ -23,12 +23,13 @@ jobs:
             echo "Custom Job 1 Failed"
             exit 1  # Set a non-zero exit status to indicate failure
           else
-            echo "job-status=${{ steps.get_custom_job_1_status.outputs.job-status }}" >> $GITHUB_ENV
+            echo "job-status=${{ steps.custom_step_1.outputs.job-status }}" >> $GITHUB_ENV
           fi
 
   custom_job_2:
     runs-on: ubuntu-latest
-    needs: [ custom_job_1 ]
+    needs: [custom_job_1]
+    if: ${{ always() && steps.custom_step_1.outputs.job-status != 'failure' }}
 
     steps:
       - name: Checkout code
@@ -36,15 +37,6 @@ jobs:
 
       - name: Your Custom Step 2
         run: |
-          echo "Running Custom Job 2 even if Custom Job 1 failed jobs.custom_job_1"
-
-      - name: Set Badge Status
-        run: |
-          if [ "$job-status" == "success" ]; then
-            echo "::set-output name=badge::success"
-          else
-            echo "::set-output name=badge::failure"
-          fi
-
-    outputs:
-      badge: ${{ steps.set_badge_status.outputs.badge }}
+          # Your custom script or command here
+          # Example:
+          echo "Running Custom Job 2 since Custom Job 1 succeeded"
