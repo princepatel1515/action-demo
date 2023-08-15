@@ -19,7 +19,7 @@ jobs:
         run: |
           # Your custom script or command here for custom_job_1
           # Example:
-          if [ "$SOME_CONDITION_1" != "true" ]; then
+          if [ "$SOME_CONDITION_1" == "true" ]; then
             echo "Custom Job 1 Failed"
             echo "job-status=failure" >> $GITHUB_ENV
           else
