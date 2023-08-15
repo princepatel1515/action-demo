@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  custom_combined_job:
+  custom_job_1:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,18 +17,22 @@ jobs:
       - name: Your Custom Step 1
         id: custom_step_1
         run: |
-          # Your custom script or command here for custom_job_1
+          # Your custom script or command here
           # Example:
           if [ "$SOME_CONDITION_1" == "true" ]; then
             echo "Custom Job 1 Failed"
+            exit 1
             echo "job-status=failure" >> $GITHUB_ENV
           else
             echo "job-status=success" >> $GITHUB_ENV
           fi
+          
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Your Custom Step 2 (Conditional)
-        if: ${{ always() && steps.custom_step_1.outputs.job-status == 'success' }}
+      - name: Your Custom Step 2
+        if: ${{ always() && needs.custom_job_1.outputs.job-status != 'success' }}
         run: |
-          # Your custom script or command here for custom_job_2
+          # Your custom script or command here
           # Example:
           echo "Running Custom Job 2 since Custom Job 1 succeeded"
